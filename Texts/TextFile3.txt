@@ -1,0 +1,6 @@
+﻿This file checks if some symbols like ";", "," and other are words in my list
+Also if "o'clock" is a word
+Or something like "super-puper"
+And let's check a frequency and lines/positions
+lines
+let's "'" "-" and
