@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace WordSplitter
 {
@@ -9,12 +11,24 @@ namespace WordSplitter
             FileReader fileReader = new FileReader();
             string[] lines = fileReader.GetLines();
             LineReader lineReader = new LineReader(lines);
-            MyDictionary dictionary = lineReader.GetDictionary();
+
+            Dictionary<string, List<Pair>> dictionary = lineReader.GetDictionary();
+
+            // Sorting by occurences and by alphabeth
+            var sortedDictionary = from item in dictionary
+                                   orderby item.Key
+                                   select item;
+
+            sortedDictionary = from item in sortedDictionary
+                         orderby item.Value.Count() descending
+                         select item;
+
+            dictionary = new Dictionary<string, List<Pair>>(sortedDictionary);
             PrintWords(dictionary);
             PrintInfo(dictionary);
         }
 
-        static void PrintWords(MyDictionary dictionary)
+        static void PrintWords(Dictionary<string, List<Pair>> dictionary)
         {
             Console.WriteLine("\n Here's the list of the words:");
             foreach (var word in dictionary)
@@ -30,7 +44,7 @@ namespace WordSplitter
             }
         }
 
-        static void PrintInfo(MyDictionary dictionary)
+        static void PrintInfo(Dictionary<string, List<Pair>> dictionary)
         {
             Console.WriteLine();
             Console.WriteLine();

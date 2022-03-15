@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace WordSplitter
 {
     internal class LineReader
     {
-        MyDictionary words;
+        //MyDictionary words;
+        Dictionary<string, List<Pair>> words;
 
         public LineReader(string[] lines)
         {
-            words = new MyDictionary();
+            words  = new Dictionary<string, List<Pair>>();
             ReadLines(lines);
         }
         /// <summary>
@@ -38,18 +40,19 @@ namespace WordSplitter
         void ReadLine(string line, int totalIndex, int lineIndex)
         {
             Regex regex = new Regex(@"(\w)[\'\-\w]*");
-            Match match = regex.Match(line);
-            while (match.Success)
+            MatchCollection matches = regex.Matches(line);
+            foreach (Match match in matches)
             {
                 string word = match.Value.ToLower();
-                int location = match.Index;
-                words.Add(word, lineIndex, location + totalIndex);
-
-                match = match.NextMatch();
+                if (!words.ContainsKey(word))
+                {
+                    words.Add(word, new List<Pair>());
+                }
+                words[word].Add(new Pair { Line = lineIndex, Position = totalIndex + match.Index });
             }
         }
 
-        public MyDictionary GetDictionary()
+        public Dictionary<string, List<Pair>> GetDictionary()
         {
             return words;
         }

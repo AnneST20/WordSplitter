@@ -11,8 +11,15 @@ namespace WordSplitter
 
         public FileReader()
         {
-            currentPath = Directory.GetCurrentDirectory()
-                .Replace(@"bin\Debug\net5.0", @"Texts\");
+            if (Directory.GetCurrentDirectory().Contains(@"bin\Debug\net5.0"))
+            {
+                currentPath = Directory.GetCurrentDirectory()
+                    .Replace(@"bin\Debug\net5.0", @"Texts\");
+            }
+            else
+            {
+                currentPath = Directory.GetCurrentDirectory();
+            }
 
             // this is for the ability to enter the number of the text file
             // instead of writing the full path
