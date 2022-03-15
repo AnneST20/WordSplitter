@@ -15,13 +15,8 @@ namespace WordSplitter
             Dictionary<string, List<Pair>> dictionary = lineReader.GetDictionary();
 
             // Sorting by occurences and by alphabeth
-            var sortedDictionary = from item in dictionary
-                                   orderby item.Key
-                                   select item;
-
-            sortedDictionary = from item in sortedDictionary
-                         orderby item.Value.Count() descending
-                         select item;
+            var sortedDictionary = dictionary.OrderByDescending(d => d.Value.Count)
+                                             . ThenBy(d => d.Key);
 
             dictionary = new Dictionary<string, List<Pair>>(sortedDictionary);
             PrintWords(dictionary);
