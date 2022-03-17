@@ -38,8 +38,8 @@ namespace WordSplitter
         /// <param name="lineIndex">The number of current line</param>
         void ReadLine(string line, int totalIndex, int lineIndex)
         {
-            Regex regex = new Regex(@"(\w)[\'\-\w]*");
-            MatchCollection matches = regex.Matches(line);
+            var regex = new Regex(@"(\w)[\'\-\w]*");
+            var matches = regex.Matches(line);
             foreach (Match match in matches)
             {
                 string word = match.Value.ToLower();

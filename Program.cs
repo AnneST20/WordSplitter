@@ -8,10 +8,9 @@ namespace WordSplitter
     {
         static void Main(string[] args)
         {
-            FileReader fileReader = new FileReader();
-            string[] lines = fileReader.GetLines();
-            LineReader lineReader = new LineReader(lines);
-
+            var fileReader = new FileReader();
+            var lines = fileReader.GetLines();
+            var lineReader = new LineReader(lines);
             var dictionary = lineReader.GetDictionary();
 
             // Sorting by occurrences and by alphabet
