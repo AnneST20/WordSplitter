@@ -8,13 +8,14 @@ namespace WordSplitter
         string[] lines;
         string[] files;
         string currentPath;
+        static string exePosition = @"bin\Debug\net5.0";
 
         public FileReader()
         {
-            if (Directory.GetCurrentDirectory().Contains(@"bin\Debug\net5.0"))
+            if (Directory.GetCurrentDirectory().Contains(exePosition))
             {
                 currentPath = Directory.GetCurrentDirectory()
-                    .Replace(@"bin\Debug\net5.0", @"Texts\");
+                    .Replace(exePosition, @"Texts\");
             }
             else
             {
@@ -89,11 +90,11 @@ namespace WordSplitter
 
             if (Int32.TryParse(path, out number))
             {
-                try
+                if (files.Length <= number)
                 {
                     path = files[number - 1];
                 }
-                catch 
+                else
                 {
                     return null;
                 }

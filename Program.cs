@@ -12,11 +12,11 @@ namespace WordSplitter
             string[] lines = fileReader.GetLines();
             LineReader lineReader = new LineReader(lines);
 
-            Dictionary<string, List<Pair>> dictionary = lineReader.GetDictionary();
+            var dictionary = lineReader.GetDictionary();
 
-            // Sorting by occurences and by alphabeth
+            // Sorting by occurrences and by alphabet
             var sortedDictionary = dictionary.OrderByDescending(d => d.Value.Count)
-                                             . ThenBy(d => d.Key);
+                                             .ThenBy(d => d.Key);
 
             dictionary = new Dictionary<string, List<Pair>>(sortedDictionary);
             PrintWords(dictionary);
@@ -63,7 +63,7 @@ namespace WordSplitter
                 wordIsEntered = true;
                 Console.ResetColor();
 
-                if (!dictionary.ContainsKey(word))
+                if (word != null && !dictionary.ContainsKey(word))
                 {
                     word = null;
                 }
