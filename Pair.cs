@@ -6,7 +6,5 @@ namespace WordSplitter
     {
         public int Line { get; set; }
         public int Position { get; set; }
-
-        public Pair() { }
     };
 }

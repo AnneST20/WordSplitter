@@ -90,14 +90,7 @@ namespace WordSplitter
 
             if (Int32.TryParse(path, out number))
             {
-                if (files.Length <= number)
-                {
-                    path = files[number - 1];
-                }
-                else
-                {
-                    return null;
-                }
+                path = files.Length <= number ? path = files[number - 1] : null;
             }
 
             return path;
